@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Успех</title>
+    <link rel="stylesheet"/>
+    <style>
+        body{
+            background: #fcba03;
+            display: flex;
+            justify-content: center;
+            }
+        .regForm{
+            background: #58f72d;
+            width: 300px;
+            padding: 10px 0px 15px 15px;
+            margin: 70px;
+            font-size: 15px;
+            }
+        .button{
+            display: flex;
+            justify-content: center;
+        }
+        .name{
+        display: flex;
+        justify-content: center;
+        }
+    </style>
+</head>
+<body>
+<div class="regForm">
+<h3 class="name">Данных пользователя</h3>
+    <h3 class="name">изменены</h3>
+    <form th:action="@{/auth/logout}" th:method="POST">
+    <a class="button" href="/info">Вернуться в профиль</a>
+        <p></p>
+        <div class="button">
+        <button type="submit">Выйти из аккаунта</button>
+        </div>
+</form>
+</div>
+</body>
+</html>

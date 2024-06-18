@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Профиль</title>
+  <link rel="stylesheet"/>
+<style>
+  body{
+      background: #fcba03;
+      display: flex;
+      justify-content: center;
+      }
+  .regForm{
+      background: #58f72d;
+      width: 300px;
+      padding: 10px 0px 15px 15px;
+      margin: 70px;
+      font-size: 15px;
+  table{
+      width: 100%;
+      justify-content: center;
+      font-size: 15px;
+      border-collapse: collapse;
+  }
+  caption{
+      text-align: center;
+      font-size: 20px;
+  }
+  th{
+      font-size: 18px;
+      font-weight: normal;
+      border-collapse: collapse;
+      text-align: left;
+  }
+  td{
+      text-align: left;
+  }
+  #cssTable td{
+      text-align: center;
+      vertical-align: middle;
+  }
+  .elem{
+      display: flex;
+      justify-content: center;
+      }
+  .button{
+      display: flex;
+      justify-content: center;
+  }
+</style>
+</head>
+<body>
+<div class="regForm" th:object="${person}">
+<form  th:action="@{/auth/logout}" th:method="POST">
+<table>
+    <caption>Здраствуйте,
+      <span th:if="${person.getRole().name() == 'ROLE_ADMIN'}">администратор</span>
+      <span th:if="${person.getRole().name() == 'ROLE_USER'}">пользователь</span>
+      <br/>
+      [[${person.getUsername()}]]</caption>
+  <tr><td><p></p></td></tr>
+    <tr><th>Id:</th><td>[[${person.getId()}]]</td></tr>
+    <tr><th>Имя:</th><td>[[${person.getUsername()}]]</td></tr>
+    <tr><th>Email:</th><td>[[${person.getEmail()}]]</td></tr>
+    <tr><th>Роль:</th><td>
+      <span th:if="${person.getRole().name() == 'ROLE_ADMIN'}">Admin</span>
+      <span th:if="${person.getRole().name() == 'ROLE_USER'}">User</span>
+</table><br/>
+  <p></p>
+    <a class="elem" th:href="@{/update/{id}(id=${person.getId()})}">Редактировать данные</a>
+  <p></p>
+    <a class="elem" th:href="@{/delete/{id}(id=${person.getId()})}" onclick="return confirmdelete();">Удалить профиль</a>
+  <p></p>
+    <a class="elem" th:if="${person.getRole().name() == 'ROLE_ADMIN'}" th:href="@{/view}">Администрирование</a>
+  <p></p>
+  <div class="button"><button type="submit">Выйти из аккаунта</button></div>
+  <script>
+    function confirmdelete() {
+    if (confirm("Подтвердите удаление аккаунта")) {
+    return true;
+    } else {
+    return false;
+    }
+    }
+  </script>
+</form>
+</div>
+</body>
+</html>

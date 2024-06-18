@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование</title>
+    <link rel="stylesheet"/>
+    <style>
+        body{
+            background: #fcba03;
+            display: flex;
+            justify-content: center;
+            }
+        .regForm{
+            background: #58f72d;
+            width: 300px;
+            padding: 10px 0px 15px 15px;
+            margin: 70px;
+            font-size: 15px;
+        table{
+            width: 100%;
+            justify-content: center;
+            font-size: 15px;
+            border-collapse: collapse;
+        }
+        caption{
+            text-align: center;
+            font-size: 20px;
+        }
+        th{
+            font-size: 18px;
+            font-weight: normal;
+            border-collapse: collapse;
+            text-align: left;
+        }
+        td{
+            text-align: left;
+        }
+        #cssTable td{
+            text-align: center;
+            vertical-align: middle;
+        }
+        .elem{
+            display: flex;
+            justify-content: center;
+            }
+        .button{
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+<div class="regForm">
+<form th:method="POST" th:action="@{/update/{id}(id=${person.getId()})}" th:object="${person}">
+    <input type="hidden" th:field="*{id}" value="${person.getId()}"/>
+    <br/>
+    <table>
+        <caption>Редактирование данных</caption>
+        <tr><td><p></p></td></tr>
+        <tr><td><label class="labeltext" for="username">Имя:</label> </td><td>
+        <input type="text" th:field="*{username}" id="username" value="${person.getName()}"/>
+        <div style="color:#c91212" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</div></td></tr>
+
+        <tr><td><label class="labeltext" for="email">Email:</label></td><td>
+        <input type="text" th:field="*{email}" id="email" value="${person.getEmail()}"/>
+        <div style="color:#c91212" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</div></td></tr>
+
+        <tr><td><label class="labeltext" for="password">Пароль:</label></td><td>
+        <input type="password" th:field="*{password}" id="password" value="${person.getPassword()}"/>
+        <div style="color:#c91212" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</div></td></tr>
+    </table>
+    <br/>
+<div class="button">
+<button type="submit">Сохранить</button>
+</div>
+    <p></p>
+    <a class="elem" href="/info"><button>Вернуться в профиль</button></a>
+</form>
+</div>
+</body>
+</html>
